@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EDIT SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="header">
+
+    <a class="navbar-brand" th:href="@{/}">ระบบแจ้งซ่อมอุปกรณ์ห้องเรียน</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item" th:class="${activePage == 'info'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/login}">ADMIN<span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item" th:class="${activePage == 'contact'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/informationuser}">USER</a>
+            </li>
+
+            <li class="nav-item" >
+                <a class="nav-link" th:href="@{/checkstatus}">CHECK STATUS</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div align="center">
+    <h2>Admin Edit</h2>
+    <form action="#" th:action="@{/save}" th:object="${data}" method="post">
+        <table class="table table-hover">
+            <tr>
+                <td>ID</td>
+                <td><input type="text" th:field="*{id}" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Firstname</td>
+                <td><input type="text" th:field="*{firstname}"/></td>
+            </tr>
+            <tr>
+                <td>Lastname</td>
+                <td><input type="text" th:field="*{lastname}"/></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td><input type="text" th:field="*{phone}"/></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" th:field="*{email}"/></td>
+            </tr>
+            <tr>
+                <td>Objectfail</td>
+                <td><input type="text" th:field="*{objectfail}"readonly="readonly"/></td>
+            </tr>
+
+            <tr>
+                <td>Place</td>
+                <td><input type="text" th:field="*{place}"readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>ObjectsCondition</td>
+                <td><input type="text" th:field="*{objectcondition}"readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Docname</td>
+                <td><input type="text" th:field="*{docName}"readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Doctype</td>
+                <td><input type="text" th:field="*{docType}"readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Picture</td>
+                <td><input type="text" th:field="*{picture}"readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td><input type="text" th:field="*{date}"readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <select th:field="*{status}">
+                    <option th:value="'Processing'" th:text="Processing"></option>
+                    <option th:value="'Success'" th:text="Success"></option>
+                </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input class="btn btn-success" type="submit" value="Edit"></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+
+<footer class="footer mt-auto py-3" th:fragment="footer">
+    <div class="container">
+        <span class="text-muted">Created By 61050302 Sorawit Likithomasarn</span>
+    </div>
+</footer>
+</body>
+</html>

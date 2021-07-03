@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN SYSTEM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{styles/main.css}" rel="stylesheet" /></head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="header">
+
+    <a class="navbar-brand" th:href="@{/}">ระบบแจ้งซ่อมอุปกรณ์ห้องเรียน</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04"
+            aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item" th:class="${activePage == 'info'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/login}">ADMIN<span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item" th:class="${activePage == 'contact'} ? 'nav-item active' : 'nav-item'">
+                <a class="nav-link" th:href="@{/informationuser}">USER</a>
+            </li>
+
+            <li class="nav-item" >
+                <a class="nav-link" th:href="@{/checkstatus}">CHECK STATUS</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div align="center">
+    <h1>ระบบจัดการข้อมูลลูกค้า</h1>
+    <br/>
+    <div>
+        <form th:action="@{/adminfindall}" >
+            ค้นหา : <input type="text" name="keyword" th:value="${keyword}" required>
+            &nbsp;
+
+            <input type="submit" value="Search">
+            &nbsp;
+        </form>
+</div>
+    <br>
+
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th> Id</th>
+            <th> Name</th>
+            <th> Lname</th>
+            <th> Phone</th>
+            <th> Email</th>
+            <th> Date </th>
+            <th> ObjectFail </th>
+            <th> Status </th>
+            <th> Images </th>
+            <th> Manage Data </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${ListInformation}">
+            <td th:text="${user.id}">ID</td>
+            <td th:text="${user.firstname}">Firstname</td>
+            <td th:text="${user.lastname}">Lastname</td>
+            <td th:text="${user.phone}">Phone</td>
+            <td th:text="${user.email}">Email</td>
+            <td th:text="${user.date}">Date</td>
+            <td th:text="${user.objectfail}">ObjectFail</td>
+            <td th:text="${user.status}">Status</td>
+            <td><a th:href = "@{'/dowloadFile/'+${user.id}}">Dowload</a></td>
+            <td>
+                <a th:href="@{'/edit/' + ${user.id}}"><input type="button" class="btn btn-warning"  value="แก้ไขข้อมูล"></a>
+                <a th:href="@{'/delete/' + ${user.id}}"><input type="button" class="btn btn-danger" value="ลบข้อมูล"></a>
+                <a th:href="@{'/send-email-user/' + ${user.id}}"><input type="button" class="btn btn-primary" value="ส่งข้อความทางอีเมล"></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <a href="/report"><button type="button" class="btn btn-primary">ReportSummary</button></a>
+    <a href="/adminfindall"><button type="button" class="btn btn-secondary">Back</button></a>
+
+
+</div>
+<script type="text/javascript">
+    function clearFilter() {
+        window.location = '/';
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+        crossorigin="anonymous">
+</script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js">
+</script>
+
+<footer class="footer mt-auto py-3" th:fragment="footer">
+    <div class="container">
+        <span class="text-muted">Created By 61050302 Sorawit Likithomasarn</span>
+    </div>
+</footer>
+</body>
+</html>
